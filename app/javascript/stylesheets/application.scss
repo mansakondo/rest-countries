@@ -1,3 +1,18 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+	button:focus, input:focus {
+		outline: 0;
+	}
+}
+
+ul {
+	li {
+		margin-bottom: 4px;
+	}
+	li:last-of-type {
+		margin-bottom: 0px;
+	}
+}
