@@ -8,11 +8,18 @@
 	}
 }
 
+.surface {
+	@apply bg-white dark:bg-blue-dark rounded shadow
+}
+
 ul {
 	li {
-		margin-bottom: 4px;
+		@apply py-2 px-6
 	}
 	li:last-of-type {
 		margin-bottom: 0px;
+	}
+	li:hover {
+		@apply bg-gray-veryLightGray dark:bg-blue-veryDarkBlue
 	}
 }

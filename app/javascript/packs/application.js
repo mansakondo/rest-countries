@@ -15,17 +15,44 @@ ActiveStorage.start()
 import "stylesheets/application"
 
 window.onload = () => {
-	const toggle = document.getElementsByTagName('button')[0]
-	toggle.addEventListener('click', toggleDarkMode)
 
-	const expandButton = document.getElementsByTagName('button')[1]
-	expandButton.addEventListener('click', () => {
-		const regionsList = document.getElementsByTagName('ul')[0]
-		regionsList.classList.toggle('opacity-0')
+	// Toggle dark mode
+	const themeForm = document.querySelector('form')
+	const theme = themeForm.firstElementChild
+	const toggleButton = themeForm.lastElementChild
+	toggleButton.addEventListener('click', () => {
+		document.documentElement.classList.toggle('dark')
+
+		if (document.documentElement.classList.contains('dark')) {
+			theme.value = 'dark'
+		} else {
+			theme.value = 'light'
+		}
 	})
 
-}
+	// Expand region select
+	const expandButton = document.getElementById('expand')
+	const regionSelect = document.getElementById('region-select')
 
-const toggleDarkMode = () => {
-	document.documentElement.classList.toggle('dark')
+	expandButton.addEventListener('click', () => {
+		regionSelect.classList.toggle('opacity-0')
+
+		if (regionSelect.classList.contains('opacity-0')) {
+			expandButton.firstElementChild.textContent = 'expand_more'
+		} else {
+			expandButton.firstElementChild.textContent = 'expand_less'
+		}
+	})
+
+	const regionForm = document.getElementById('region-form')
+	const regions = regionSelect.getElementsByTagName('li')
+	for (let region of regions) {
+		region.addEventListener('click', () => {
+			regionForm.firstElementChild.value = region.textContent
+			regionForm.submit()
+		})
+	}
+
+	// Search for countries
+	const searchBar = document.querySelector('input[type=search]')
 }

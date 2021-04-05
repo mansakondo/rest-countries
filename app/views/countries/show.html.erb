@@ -1,1 +1,7 @@
-<%= render @country %>
+<a href="<%= home_path %>">
+  <button class="flex items-center px-8 py-2 mb-16 surface">
+    <span class="mr-2 material-icons">arrow_back</span>
+    <span>Back</span>
+  </button>
+</a>
+<%= render partial: 'details', object: @country, as: :country %>

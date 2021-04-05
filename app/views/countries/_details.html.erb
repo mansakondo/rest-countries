@@ -1,0 +1,22 @@
+<div class="md:flex">
+  <img src="<%= country.flag %>" alt="">
+  <div class="p-8">
+    <h1 class="mb-3 text-xl font-extrabold"><%= country.name %></h1>
+    <div>
+      <p><span class="font-semibold">Native Name: </span><%= country.population %></p>
+      <p><span class="font-semibold">Population: </span><%= country.population %></p>
+      <p><span class="font-semibold">Region: </span><%= country.region %></p>
+      <p><span class="font-semibold">Sub Region: </span><%= country.subregion %></p>
+      <p><span class="font-semibold">Capital: </span><%= country.capital %></p>
+    </div>
+    <div>
+      <p><span class="font-semibold">Top Level Domain: </span><%= country.processed_top_level_domain %></p>
+      <p><span class="font-semibold">Currencies: </span><%= country.processed_currencies %></p>
+      <p><span class="font-semibold">Languages: </span><%= country.processed_languages %></p>
+    </div>
+    <div>
+      <h2>Border Countries</h2>
+      <p><%= country.processed_borders %></p>
+    </div>
+  </div>
+</div>

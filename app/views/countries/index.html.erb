@@ -1,1 +1,32 @@
-<%= render @countries %>
+<div class="md:flex">
+  <form action="/countries" class="flex items-center h-16 p-3 mb-10 mr-4 surface md:w-4/12 dark:bg-blue-dark">
+    <button type="submit" class="flex">
+      <span class="ml-4 material-icons text-gray-dark dark:text-white">search</span>
+    </button>
+    <input type="search" name="name" placeholder="Search for a country" class="ml-8 bg-transparent dark:placeholder-white">
+  </form>
+
+  <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
+    <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface dark:bg-blue-dark">
+      <span><%= params[:region] || 'Filter by Region' %></span>
+      <button class="flex" id="expand">
+        <span class="material-icons">expand_more</span>
+      </button>
+    </div>
+
+    <form id="region-form">
+      <input type="hidden" name="region">
+      <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300 dark:bg-blue-dark">
+        <% %w[ Africa America Asia Europe Oceania ].each do |region| %>
+          <% unless params[:region] == region %>
+            <%= content_tag(:li, "#{region}") %>
+          <% end %>
+        <% end %>
+      </ul>
+    </form>
+  </div>
+</div>
+
+<main class="w-9/12 mx-auto mt-36 md:grid md:grid-cols-4 md:gap-10 md:w-auto md:mt-0">
+  <%= render @countries %>
+</main>

@@ -1,7 +1,11 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: [],
+  purge: [
+    './app/**/*.html.erb',
+    './app/helpers/**/*.rb',
+    './app/javascript/**/*.js',
+  ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
@@ -21,12 +25,12 @@ module.exports = {
     fontFamily: {
       'body': ['Nunito Sans']
     },
-    fontSize: {
-      extend: {
+    extend: {
+      fontSize: {
         'body1': '14px',
         'body2': '16px'
       }
-    }
+    },
   },
   variants: {
     extend: {},
