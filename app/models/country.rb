@@ -14,11 +14,11 @@ class Country
     end
 
     def find_by_name(name)
-      all.select { |country_info| country_info.name == name }.first
+      all.select { |country_info| country_info.name =~ /^#{name}/i }.first || all
     end
 
     def find_by_region(region)
-      all.select { |country_info| country_info.region == region }
+      all.select { |country_info| country_info.region =~ /#{region}/i } || all
     end
 
     def find_by_code(code)

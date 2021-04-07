@@ -19,9 +19,9 @@ class CountriesController < ApplicationController
     name = country_params[:name]
     region = country_params[:region]
 
-    if (name && name =~ /[a-z]+/i)
+    if (name && name =~ /^[a-z]+/i)
       Country.find_by_name(name)
-    elsif region && region =~ /[a-z]/i
+    elsif region && region =~ /^[a-z]+/i
       Country.find_by_region(region)
     else
       Country.all

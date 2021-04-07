@@ -7,7 +7,7 @@
   </form>
 
   <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
-    <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface dark:bg-blue-dark">
+    <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface">
       <span><%= params[:region] || 'Filter by Region' %></span>
       <button class="flex" id="expand">
         <span class="material-icons">expand_more</span>
@@ -16,8 +16,8 @@
 
     <form id="region-form">
       <input type="hidden" name="region">
-      <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300 dark:bg-blue-dark">
-        <% %w[ Africa America Asia Europe Oceania ].each do |region| %>
+      <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300">
+        <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
           <% unless params[:region] == region %>
             <%= content_tag(:li, "#{region}") %>
           <% end %>

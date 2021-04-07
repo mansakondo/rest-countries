@@ -14,7 +14,7 @@ ActiveStorage.start()
 
 import "stylesheets/application"
 
-window.onload = () => {
+window.addEventListener('DOMContentLoaded', () => {
 
 	// Toggle dark mode
 	const themeForm = document.querySelector('form')
@@ -52,7 +52,4 @@ window.onload = () => {
 			regionForm.submit()
 		})
 	}
-
-	// Search for countries
-	const searchBar = document.querySelector('input[type=search]')
-}
+})
