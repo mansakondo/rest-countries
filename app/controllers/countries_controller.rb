@@ -20,9 +20,9 @@ class CountriesController < ApplicationController
     region = country_params[:region]
 
     if (name && name =~ /^[a-z]+/i)
-      Country.find_by_name(name)
+      Country.find_by_name(name) || Country.all
     elsif region && region =~ /^[a-z]+/i
-      Country.find_by_region(region)
+      Country.find_by_region(region) || Country.all
     else
       Country.all
     end

@@ -14,11 +14,12 @@ class Country
     end
 
     def find_by_name(name)
-      all.select { |country_info| country_info.name =~ /^#{name}/i }.first || all
+      name = name.gsub(/[()]/) { |parenthesis| '\\' + parenthesis }
+      all.select { |country_info| country_info.name =~ /^#{name}/i }.first
     end
 
     def find_by_region(region)
-      all.select { |country_info| country_info.region =~ /#{region}/i } || all
+      all.select { |country_info| country_info.region =~ /#{region}/i }
     end
 
     def find_by_code(code)

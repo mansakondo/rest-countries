@@ -1,22 +1,30 @@
-<div class="md:flex">
-  <img src="<%= country.flag %>" alt="">
-  <div class="p-8">
-    <h1 class="mb-3 text-xl font-extrabold"><%= country.name %></h1>
-    <div>
-      <p><span class="font-semibold">Native Name: </span><%= country.population %></p>
-      <p><span class="font-semibold">Population: </span><%= country.population %></p>
-      <p><span class="font-semibold">Region: </span><%= country.region %></p>
-      <p><span class="font-semibold">Sub Region: </span><%= country.subregion %></p>
-      <p><span class="font-semibold">Capital: </span><%= country.capital %></p>
+<div class="md:flex md:h-72">
+  <img src="<%= country.flag %>" class="shadow">
+  <div class="p-6 ml-10">
+    <h1 class="mb-6 text-2xl font-extrabold"><%= country.name %></h1>
+    <div class="leading-7 md:flex">
+      <div>
+        <p><span class="font-semibold">Native Name: </span><%= country.native_name %></p>
+        <p><span class="font-semibold">Population: </span><%= country.population %></p>
+        <p><span class="font-semibold">Region: </span><%= country.region %></p>
+        <p><span class="font-semibold">Sub Region: </span><%= country.subregion %></p>
+        <p><span class="font-semibold">Capital: </span><%= country.capital %></p>
+      </div>
+      <div class="mt-10 md:mt-0 md:ml-32">
+        <p><span class="font-semibold">Top Level Domain: </span><%= country.processed_top_level_domain %></p>
+        <p><span class="font-semibold">Currencies: </span><%= country.processed_currencies.join(', ') %></p>
+        <p><span class="font-semibold">Languages: </span><%= country.processed_languages.join(', ') %></p>
+      </div>
     </div>
-    <div>
-      <p><span class="font-semibold">Top Level Domain: </span><%= country.processed_top_level_domain %></p>
-      <p><span class="font-semibold">Currencies: </span><%= country.processed_currencies %></p>
-      <p><span class="font-semibold">Languages: </span><%= country.processed_languages %></p>
-    </div>
-    <div>
-      <h2>Border Countries</h2>
-      <p><%= country.processed_borders %></p>
+    <div class="flex flex-wrap items-baseline mt-10">
+      <span class="font-semibold md:mr-4">Border Countries: </span>
+      <div class="flex flex-col mt-2 borders md:flex-row md:flex-wrap">
+        <% country.processed_borders.each do |border| %>
+          <a href="<%= country_path(border) %>">
+            <button class="btn"><%= border %></button>
+          </a>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
