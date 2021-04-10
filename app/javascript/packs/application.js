@@ -30,26 +30,28 @@ document.addEventListener('turbolinks:load', () => {
 		}
 	})
 
-	// Expand region select
-	const expandButton = document.getElementById('expand')
-	const regionSelect = document.getElementById('region-select')
+	if (window.location.pathname == "/") {
+		// Expand region select
+		const expandButton = document.getElementById('expand')
+		const regionSelect = document.getElementById('region-select')
 
-	expandButton.addEventListener('click', () => {
-		regionSelect.classList.toggle('opacity-0')
+		expandButton.addEventListener('click', () => {
+			regionSelect.classList.toggle('opacity-0')
 
-		if (regionSelect.classList.contains('opacity-0')) {
-			expandButton.firstElementChild.textContent = 'expand_more'
-		} else {
-			expandButton.firstElementChild.textContent = 'expand_less'
-		}
-	})
-
-	const regionForm = document.getElementById('region-form')
-	const regions = regionSelect.getElementsByTagName('li')
-	for (let region of regions) {
-		region.addEventListener('click', () => {
-			regionForm.firstElementChild.value = region.textContent
-			regionForm.submit()
+			if (regionSelect.classList.contains('opacity-0')) {
+				expandButton.firstElementChild.textContent = 'expand_more'
+			} else {
+				expandButton.firstElementChild.textContent = 'expand_less'
+			}
 		})
+
+		const regionForm = document.getElementById('region-form')
+		const regions = regionSelect.getElementsByTagName('li')
+		for (let region of regions) {
+			region.addEventListener('click', () => {
+				regionForm.firstElementChild.value = region.textContent
+				regionForm.submit()
+			})
+		}
 	}
 })
