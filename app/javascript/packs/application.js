@@ -14,7 +14,7 @@ ActiveStorage.start()
 
 import "stylesheets/application"
 
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbolinks:load', () => {
 
 	// Toggle dark mode
 	const themeForm = document.querySelector('form')
