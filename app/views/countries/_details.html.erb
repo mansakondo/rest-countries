@@ -16,7 +16,7 @@
         <p><span class="font-semibold">Languages: </span><%= country.processed_languages.join(', ') %></p>
       </div>
     </div>
-    <div class="flex flex-wrap items-baseline mt-10">
+    <div class="mt-10 md:flex md:flex-wrap md:items-baseline">
       <span class="font-semibold md:mr-4">Border Countries: </span>
       <div class="flex flex-col mt-2 borders md:flex-row md:flex-wrap">
         <% country.processed_borders.each do |border| %>
