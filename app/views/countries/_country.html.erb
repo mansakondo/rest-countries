@@ -1,6 +1,6 @@
 <a href="<%= country_path(country.name) %>">
   <div class="h-full mb-10 rounded shadow surface hover:bg-gray-veryLightGray dark:hover:bg-blue-veryDarkBlue">
-    <img src="<%= country.flag %>" class="shadow">
+    <img src="<%= country.flag %>" alt="<%= country.name %>"class="shadow">
     <div class="p-8">
       <h1 class="mb-3 text-xl font-extrabold"><%= country.name %></h1>
       <p><span class="font-semibold">Population: </span><%= country.population %></p>

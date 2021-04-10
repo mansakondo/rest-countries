@@ -3,26 +3,27 @@
     <button type="submit" class="flex">
       <span class="ml-4 material-icons text-gray-dark dark:text-white">search</span>
     </button>
-    <input type="search" name="name" placeholder="Search for a country" class="ml-8 bg-transparent dark:placeholder-white">
+    <input type="search" name="name" placeholder="Search for a country" class="ml-8 bg-transparent dark:placeholder-white" aria-label="Search for a country">
   </form>
 
   <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
     <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface">
       <span><%= params[:region] || 'Filter by Region' %></span>
-      <button class="flex" id="expand">
+      <button class="flex" id="expand" aria-haspopup="listbox">
         <span class="material-icons">expand_more</span>
       </button>
     </div>
 
     <form id="region-form">
       <input type="hidden" name="region">
-      <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300">
+      <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
         <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
           <% unless params[:region] == region %>
-            <%= content_tag(:li, "#{region}") %>
+            <%= content_tag(:li, "#{region}", role: "option") %>
           <% end %>
         <% end %>
       </ul>
+      <input type="submit" class="hidden" aria-label="Submit">
     </form>
   </div>
 </div>
