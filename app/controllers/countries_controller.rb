@@ -6,7 +6,7 @@ class CountriesController < ApplicationController
   end
 
   def show
-    @country = Country.find_by_name(country_params[:name])
+    @country = Country.find_by_name(country_params[:name]).first
   end
 
   private
