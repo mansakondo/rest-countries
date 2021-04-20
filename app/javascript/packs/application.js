@@ -14,44 +14,59 @@ ActiveStorage.start()
 
 import "stylesheets/application"
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('click', (event) => {
+	const target = event.target.closest('button') || event.target
 
-	// Toggle dark mode
-	const themeForm = document.querySelector('form')
-	const theme = themeForm.firstElementChild
-	const toggleButton = themeForm.lastElementChild
-	toggleButton.addEventListener('click', () => {
-		document.documentElement.classList.toggle('dark')
+	if (target.dataset.toggle) {
+		const value = target.dataset.toggle
+		document.documentElement.classList.toggle(value)
 
-		if (document.documentElement.classList.contains('dark')) {
-			theme.value = 'dark'
-		} else {
-			theme.value = 'light'
-		}
-	})
+		if (value == 'dark') {
+			const form = target.closest('form')
+			const theme = form.querySelector("input[type='hidden']")
 
-	if (window.location.pathname == "/") {
-		// Expand region select
-		const expandButton = document.getElementById('expand')
-		const regionSelect = document.getElementById('region-select')
-
-		expandButton.addEventListener('click', () => {
-			regionSelect.classList.toggle('opacity-0')
-
-			if (regionSelect.classList.contains('opacity-0')) {
-				expandButton.firstElementChild.textContent = 'expand_more'
+			if (document.documentElement.classList.contains(value)) {
+				theme.value = 'dark'
 			} else {
-				expandButton.firstElementChild.textContent = 'expand_less'
+				theme.value = 'light'
 			}
-		})
 
-		const regionForm = document.getElementById('region-form')
-		const regions = regionSelect.getElementsByTagName('li')
-		for (let region of regions) {
-			region.addEventListener('click', () => {
-				regionForm.firstElementChild.value = region.textContent
-				regionForm.submit()
-			})
+			const params = (new URL(document.location)).searchParams
+
+			if (params.get('region')) {
+				const param = document.createElement("input")
+				param.type = 'hidden'
+				param.name = 'region'
+				param.value = params.get('region')
+
+				form.prepend(param)
+			}
+		}
+	}
+
+	if (target.closest("[role='option']") && target.form) {
+		const form = target.form
+		form.querySelector("input[type='hidden']").value = target.textContent
+		target.click()
+	}
+
+	if (target.getAttribute('role') == 'option') {
+		const submit = target.querySelector("[type='submit']")
+		const form = submit.form
+		form.querySelector("input[type='hidden']").value = submit.textContent
+		submit.click()
+	}
+
+	if (target.dataset.expand) {
+		const id = target.dataset.expand
+		const element = document.getElementById(id)
+		const classList = element.classList
+		classList.toggle('opacity-0')
+
+		const icon = target.querySelector("span[class='material-icons']")
+
+		if (icon) {
+			icon.textContent = classList.contains('opacity-0') ? 'expand_more' : 'expand_less'
 		}
 	}
 })
