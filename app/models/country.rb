@@ -15,7 +15,7 @@ class Country
 
     def find_by_name(name)
       name = name.gsub(/[()]/) { |parenthesis| '\\' + parenthesis }
-      all.select { |country_info| country_info.name =~ /^#{name}/i }.first
+      all.select { |country_info| country_info.name =~ /^#{name}/i }
     end
 
     def find_by_region(region)
