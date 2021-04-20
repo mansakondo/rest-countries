@@ -23,7 +23,7 @@
       <form>
         <input type="hidden" name="theme">
         <button type="submit" data-toggle="dark">
-          <span class="material-icons">dark_mode</span>
+          <span class="material-icons"><%= cookies[:theme] == "dark" ? "light_mode" : "dark_mode" %></span>
         </button>
       </form>
     </header>
