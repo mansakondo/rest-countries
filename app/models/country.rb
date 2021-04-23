@@ -6,7 +6,7 @@ class Country
 
   COUNTRIES_INFO = JSON.parse(Net::HTTP.get(
     'restcountries.eu',
-    '/rest/v2/all?fields=name;flag;alpha3Code;nativeName;population;region;subregion;capital;topLevelDomain;currencies;languages;borders'))
+    '/rest/v2/all?fields=name;flag;alpha3Code;nativeName;population;region;subregion;capital;topLevelDomain;currencies;languages;borders')).freeze
 
   class << self
     def all

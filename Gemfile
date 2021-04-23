@@ -58,3 +58,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "tailwindcss-rails", "~> 0.3.3"
+
+gem "futurism", github: "mansakondo/futurism", branch: "collection_rendering_for_poros"
