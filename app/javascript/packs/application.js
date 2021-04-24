@@ -14,32 +14,24 @@ ActiveStorage.start()
 
 import "stylesheets/application"
 
+"use strict"
+
 document.addEventListener('click', (event) => {
 	const target = event.target.closest('button') || event.target
 
 	if (target.dataset.toggle) {
 		const value = target.dataset.toggle
-		document.documentElement.classList.toggle(value)
 
 		if (value == 'dark') {
-			const form = target.closest('form')
-			const theme = form.querySelector("input[type='hidden']")
+			// Get the 'theme' cookie or create it
+			let theme = (document.cookie.split("; ").find((c) => c.startsWith("theme")) || (document.cookie = "theme=")).split("=")[1]
 
-			if (document.documentElement.classList.contains(value)) {
-				theme.value = 'dark'
+			if (theme == 'dark') {
+				document.documentElement.classList.remove('dark')
+				document.cookie = "theme="
 			} else {
-				theme.value = 'light'
-			}
-
-			const params = (new URL(document.location)).searchParams
-
-			if (params.get('region')) {
-				const param = document.createElement("input")
-				param.type = 'hidden'
-				param.name = 'region'
-				param.value = params.get('region')
-
-				form.prepend(param)
+				document.documentElement.classList.add('dark')
+				document.cookie = "theme=dark"
 			}
 		}
 	}

@@ -20,12 +20,9 @@
       <a href="/">
         <h1 class="text-xl font-extrabold">Where in the world?</h1>
       </a>
-      <form>
-        <input type="hidden" name="theme">
-        <button type="submit" data-toggle="dark">
-          <span class="material-icons"><%= cookies[:theme] == "dark" ? "light_mode" : "dark_mode" %></span>
-        </button>
-      </form>
+      <button data-toggle="dark">
+        <span class="material-icons"><%= cookies[:theme] == "dark" ? "light_mode" : "dark_mode" %></span>
+      </button>
     </header>
 
     <div class="mx-6 my-8 md:my-16 md:mx-16">

@@ -1,6 +1,4 @@
 class CountriesController < ApplicationController
-  before_action :set_theme
-
   def index
     @countries = fetch_countries
   end
@@ -25,12 +23,6 @@ class CountriesController < ApplicationController
       Country.find_by_region(region) || Country.all
     else
       Country.all
-    end
-  end
-
-  def set_theme
-    if params[:theme]
-      cookies[:theme] = params[:theme]
     end
   end
 end
