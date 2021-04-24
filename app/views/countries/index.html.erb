@@ -8,7 +8,7 @@
 
   <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
     <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface">
-      <span><%= params[:region] || 'Filter by Region' %></span>
+      <span id="region-name"><%= params[:region] || 'Filter by Region' %></span>
       <button class="flex" data-expand="region-select" aria-haspopup="listbox">
         <span class="material-icons">expand_more</span>
       </button>
@@ -16,11 +16,9 @@
 
     <form id="region-form" data-turbo-frame="countries">
       <input type="hidden" name="region">
-      <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
+      <ul id="region-select" class="py-4 mt-1 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
         <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
-          <% unless params[:region] == region %>
-            <%= content_tag(:li, content_tag(:button, "#{region}", type: "submit"), role: "option") %>
-          <% end %>
+          <%= content_tag(:li, content_tag(:button, "#{region}", type: "submit"), role: "option") %>
         <% end %>
       </ul>
     </form>

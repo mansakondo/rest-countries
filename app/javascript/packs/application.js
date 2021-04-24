@@ -52,11 +52,17 @@ document.addEventListener('turbo:load', () => {
 		observer.observe(countriesFrame, { attributes: true })
 	}
 
-	const turboForm = document.querySelector("form[data-turbo-frame]")
-	turboForm?.addEventListener('submit', () => {
-		const url = new URL(document.location.origin)
-		window.history.pushState(window.history.state, "", url)
-	})
+	const forms = Array.from(document.forms)
+	if (forms.length > 0) {
+		for (let form of forms) {
+			form.addEventListener('submit', () => {
+				const url = new URL(document.location.origin)
+				window.history.pushState(window.history.state, "", url)
+				document.querySelector("#region-name").src = "/"
+			})
+		}
+	}
+
 })
 document.addEventListener('click', (event) => {
 	const target = event.target.closest('button') || event.target
@@ -67,40 +73,51 @@ document.addEventListener('click', (event) => {
 		if (value == 'dark') {
 			// Get the 'theme' cookie or create it
 			let theme = (document.cookie.split("; ").find((c) => c.startsWith("theme")) || (document.cookie = "theme=")).split("=")[1]
+			const icon = target.querySelector("[class=material-icons]")
 
 			if (theme == 'dark') {
 				document.documentElement.classList.remove('dark')
+				icon.textContent = "dark_mode"
 				document.cookie = "theme="
 			} else {
 				document.documentElement.classList.add('dark')
+				icon.textContent = "light_mode"
 				document.cookie = "theme=dark"
 			}
 		}
 	}
 
 	if (target.closest("[role='option']") && target.form) {
+		document.getElementById("region-select").style.opacity = 0
 		const form = target.form
 		form.querySelector("input[type='hidden']").value = target.textContent
 		target.click()
+		const region = document.getElementById("region-name")
+		region.textContent = target.textContent
 	}
 
 	if (target.getAttribute('role') == 'option') {
+		document.getElementById("region-select").style.opacity = 0
 		const submit = target.querySelector("[type='submit']")
 		const form = submit.form
 		form.querySelector("input[type='hidden']").value = submit.textContent
 		submit.click()
+		const region = document.getElementById("region-name")
+		region.textContent = target.textContent
 	}
 
 	if (target.dataset.expand) {
 		const id = target.dataset.expand
 		const element = document.getElementById(id)
-		const classList = element.classList
-		classList.toggle('opacity-0')
-
 		const icon = target.querySelector("span[class='material-icons']")
 
-		if (icon) {
-			icon.textContent = classList.contains('opacity-0') ? 'expand_more' : 'expand_less'
+		if (element.style.opacity == 0) {
+			element.style.opacity = 1
+			icon.textContent = "expand_less"
+		} else {
+			element.style.opacity = 0
+			icon.textContent = "expand_more"
 		}
 	}
 })
+
