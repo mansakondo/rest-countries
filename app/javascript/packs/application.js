@@ -4,18 +4,60 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()
 
 import "stylesheets/application"
 
 "use strict"
 
+// document.addEventListener('turbolinks:load', () => {
+//   const searchInput = document.querySelector("input[type=search]")
+//   if (searchInput) {
+//     searchInput.oninput = (event) => {
+//       const input = event.target.value
+//
+//       fetch(`https://restcountries.eu/rest/v2/name/${input}?fields=name;flag;region;capital;population`)
+//         .then((response) => {
+//           if (!response.ok) {
+//             throw Error(response.statusText)
+//           }
+//           return response.json()
+//         }).then((json) => {
+//           const country = json[0]
+//           console.log(country.name);
+//         }).catch((error) => console.log(error + ": Couldn't find what you're looking for"))
+//     }
+//   }
+// })
+
+document.addEventListener('turbo:load', () => {
+	const observer = new MutationObserver((mutations) => {
+		for (let mutation of mutations) {
+			if (mutation.attributeName == "src") {
+				window.history.pushState(window.history.state, "", mutation.target.src)
+			}
+		}
+		console.log(mutations)
+	})
+
+	const countriesFrame = document.querySelector("turbo-frame[id=countries]")
+
+	if (countriesFrame) {
+		observer.observe(countriesFrame, { attributes: true })
+	}
+
+	const turboForm = document.querySelector("form[data-turbo-frame]")
+	turboForm?.addEventListener('submit', () => {
+		const url = new URL(document.location.origin)
+		window.history.pushState(window.history.state, "", url)
+	})
+})
 document.addEventListener('click', (event) => {
 	const target = event.target.closest('button') || event.target
 
