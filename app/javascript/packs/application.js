@@ -25,12 +25,15 @@ document.addEventListener('click', (event) => {
 		if (value == 'dark') {
 			// Get the 'theme' cookie or create it
 			let theme = (document.cookie.split("; ").find((c) => c.startsWith("theme")) || (document.cookie = "theme=")).split("=")[1]
+			const icon = target.querySelector("[class=material-icons]")
 
 			if (theme == 'dark') {
 				document.documentElement.classList.remove('dark')
+				icon.textContent = "dark_mode"
 				document.cookie = "theme="
 			} else {
 				document.documentElement.classList.add('dark')
+				icon.textContent = "light_mode"
 				document.cookie = "theme=dark"
 			}
 		}
