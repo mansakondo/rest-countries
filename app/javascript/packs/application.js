@@ -15,7 +15,30 @@ ActiveStorage.start()
 import "stylesheets/application"
 
 "use strict"
+window.addEventListener('load', createConsumer)
+function createConsumer() {
+	const scheme = "ws://"
+	const uri = scheme + this.location.host + "/minicable"
+	this.WebSocket = new WebSocket(uri)
+	let ws = this.WebSocket
 
+	ws.onmessage = (event) => {
+		const data = event.data
+		let json
+		try {
+			json = JSON.parse(data)
+		} catch {
+			json = null
+		} finally {
+			console.log(json || data);
+		}
+	}
+
+	const searchInput = document.querySelector("input[type=search]")
+	searchInput.oninput = () => {
+		ws.send(JSON.stringify({"data": searchInput.value}))
+	}
+}
 document.addEventListener('click', (event) => {
 	const target = event.target.closest('button') || event.target
 
