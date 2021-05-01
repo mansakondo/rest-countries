@@ -36,3 +36,8 @@ div.borders {
 		@apply mb-0
 	}
 }
+
+main > div {
+	opacity: 0;
+	transition: opacity 1s;
+}

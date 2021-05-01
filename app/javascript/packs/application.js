@@ -7,6 +7,7 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import "controllers"
 
 Rails.start()
 Turbolinks.start()
@@ -16,6 +17,13 @@ import "stylesheets/application"
 
 "use strict"
 
+document.addEventListener('turbolinks:load', () => {
+	document.querySelector("main").addEventListener('cable-ready:after-outer-html', (event) => {
+		const target = event.target
+		if (!target.tagName == "DIV") return
+		target.style.opacity = 1
+	})
+})
 document.addEventListener('click', (event) => {
 	const target = event.target.closest('button') || event.target
 
@@ -66,4 +74,3 @@ document.addEventListener('click', (event) => {
 	}
 })
 
-import "controllers"
