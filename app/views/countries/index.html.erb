@@ -3,12 +3,12 @@
     <button type="submit" class="flex">
       <span class="ml-4 material-icons text-gray-dark dark:text-white">search</span>
     </button>
-    <input type="search" name="name" placeholder="Search for a country" class="ml-8 bg-transparent dark:placeholder-white" aria-label="Search for a country">
+    <input data-reflex="input->Countries#find_by_name"type="search" name="name" placeholder="Search for a country" class="ml-8 bg-transparent dark:placeholder-white" aria-label="Search for a country">
   </form>
 
   <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
     <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface">
-      <span><%= params[:region] || 'Filter by Region' %></span>
+      <span><%= params[:region] && !params[:region].strip.empty? ? params[:region] : 'Filter by Region' %></span>
       <button class="flex" data-expand="region-select" aria-haspopup="listbox">
         <span class="material-icons">expand_more</span>
       </button>
@@ -19,7 +19,7 @@
       <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
         <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
           <% unless params[:region] == region %>
-            <%= content_tag(:li, content_tag(:button, "#{region}", type: "submit"), role: "option") %>
+            <%= content_tag(:li, content_tag(:button, "#{region}"), data: { reflex: "click->Countries#find_by_region", region: "#{region}" }, role: "option") %>
           <% end %>
         <% end %>
       </ul>

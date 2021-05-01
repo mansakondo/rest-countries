@@ -39,18 +39,18 @@ document.addEventListener('click', (event) => {
 		}
 	}
 
-	if (target.closest("[role='option']") && target.form) {
-		const form = target.form
-		form.querySelector("input[type='hidden']").value = target.textContent
-		target.click()
-	}
-
-	if (target.getAttribute('role') == 'option') {
-		const submit = target.querySelector("[type='submit']")
-		const form = submit.form
-		form.querySelector("input[type='hidden']").value = submit.textContent
-		submit.click()
-	}
+	// if (target.closest("[role='option']") && target.form) {
+	//   const form = target.form
+	//   form.querySelector("input[type='hidden']").value = target.textContent
+	//   target.click()
+	// }
+  //
+	// if (target.getAttribute('role') == 'option') {
+	//   const submit = target.querySelector("[type='submit']")
+	//   const form = submit.form
+	//   form.querySelector("input[type='hidden']").value = submit.textContent
+	//   submit.click()
+	// }
 
 	if (target.dataset.expand) {
 		const id = target.dataset.expand
@@ -65,3 +65,5 @@ document.addEventListener('click', (event) => {
 		}
 	}
 })
+
+import "controllers"
