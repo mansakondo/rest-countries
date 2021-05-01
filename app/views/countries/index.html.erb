@@ -1,5 +1,5 @@
 <div class="md:flex">
-  <form class="flex items-center h-16 p-3 mb-10 mr-4 surface md:w-4/12">
+  <form class="flex items-center h-16 p-3 mb-10 mr-4 surface md:w-4/12" data-turbo-frame="countries">
     <button type="submit" class="flex">
       <span class="ml-4 material-icons text-gray-dark dark:text-white">search</span>
     </button>
@@ -14,7 +14,7 @@
       </button>
     </div>
 
-    <form id="region-form">
+    <form id="region-form" data-turbo-frame="countries">
       <input type="hidden" name="region">
       <ul id="region-select" class="py-4 mt-1 opacity-0 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
         <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
@@ -27,6 +27,8 @@
   </div>
 </div>
 
-<main class="w-9/12 mx-auto mt-36 md:grid md:grid-cols-4 md:gap-10 md:w-auto md:mt-0">
-  <%= render @countries %>
+<main class="">
+  <turbo-frame id="countries" class="w-9/12 mx-auto mt-36 md:grid md:grid-cols-4 md:gap-10 md:w-auto md:mt-0">
+    <%= render @countries %>
+  </turbo-frame>
 </main>

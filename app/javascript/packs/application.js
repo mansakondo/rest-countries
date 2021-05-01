@@ -23,20 +23,21 @@ function createConsumer() {
 	let ws = this.WebSocket
 
 	ws.onmessage = (event) => {
-		const data = event.data
 		let json
 		try {
-			json = JSON.parse(data)
+			json = JSON.parse(event.data)
 		} catch {
 			json = null
 		} finally {
-			console.log(json || data);
+			const data = json || event.data
+			console.log(data);
+			document.querySelector("turbo-frame").src = window.location.origin + `/?name=${data.payload}`
 		}
 	}
 
 	const searchInput = document.querySelector("input[type=search]")
 	searchInput.oninput = () => {
-		ws.send(JSON.stringify({"data": searchInput.value}))
+		ws.send(JSON.stringify({"payload": searchInput.value}))
 	}
 }
 document.addEventListener('click', (event) => {
