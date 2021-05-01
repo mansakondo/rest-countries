@@ -60,3 +60,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "tailwindcss-rails", "~> 0.3.3"
 
 gem "stimulus_reflex", "~> 3.4"
+
+gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]
+gem "hiredis"
+
+gem "redis-session-store", "~> 0.11.3"
