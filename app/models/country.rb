@@ -1,12 +1,11 @@
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class Country
   include ActiveModel::Serializers::JSON
 
-  COUNTRIES_INFO = JSON.parse(Net::HTTP.get(
-    'restcountries.eu',
-    '/rest/v2/all?fields=name;flag;alpha3Code;nativeName;population;region;subregion;capital;topLevelDomain;currencies;languages;borders'))
+  uri = URI("https://restcountries.com/v3.1/all")
+  COUNTRIES_INFO = JSON.parse(Net::HTTP.get(uri))
 
   class << self
     def all
@@ -14,8 +13,8 @@ class Country
     end
 
     def find_by_name(name)
-      name = name.gsub(/[()]/) { |parenthesis| '\\' + parenthesis }
-      all.select { |country_info| country_info.name =~ /^#{name}/i }
+      name = name.gsub(/[()]/) { |parenthesis| "\\" + parenthesis }
+      all.select { |country_info| country_info.name["common"] =~ /^#{name}/i }
     end
 
     def find_by_region(region)
@@ -23,7 +22,7 @@ class Country
     end
 
     def find_by_code(code)
-      all.select { |country_info| country_info.alpha3_code == code }.first
+      all.select { |country_info| country_info.cca3 == code }.first
     end
   end
 
@@ -41,30 +40,37 @@ class Country
     }
   end
 
-  def process_attributes
-    self.top_level_domain = self.top_level_domain.is_a?(Array) ? top_level_domain.first : top_level_domain
-    self.currencies = currencies.map { |currency| currency['name'] }.compact
-    self.languages = languages.map { |lang| lang['name'] }.compact
-    self.borders = borders.map { |code| self.class.find_by_code(code).name }
+  def common_name
+    @name["common"]
+  end
+
+  def native_name
+    @name["nativeName"].values.first["official"]
+  end
+
+  def svg_flag
+    @flags.dig("svg")
   end
 
   def processed_top_level_domain
-    top_level_domain.first
+    tld.first
   end
 
   def processed_currencies
-    currencies.map { |currency| currency['name'] }.compact
+    currencies.values.map { |currency| currency["name"] }
   end
 
   def processed_languages
-    languages.map { |lang| lang['name'] }.compact
+    languages.values
   end
 
   def processed_borders
-    borders.map { |code| self.class.find_by_code(code).name }
+    return [] unless borders
+
+    borders.map { |code| self.class.find_by_code(code).name["common"] }
   end
 
   def to_partial_path
-    'country'
+    "country"
   end
 end
