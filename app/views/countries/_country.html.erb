@@ -1,11 +1,11 @@
 <div class="mb-10 surface hover:bg-gray-veryLightGray dark:hover:bg-blue-veryDarkBlue">
-  <a href="<%= country_path(country.name) %>">
-    <img src="<%= country.flag %>" alt="<%= country.name %>"class="shadow">
+  <a href="<%= country_path(country.common_name, theme: params[:theme]) %>">
+    <img src="<%= country.svg_flag %>" alt="<%= country.common_name %>"class="shadow">
     <div class="p-8">
-      <h1 class="mb-3 text-xl font-extrabold"><%= country.name %></h1>
+      <h1 class="mb-3 text-xl font-extrabold"><%= country.common_name %></h1>
       <p><span class="font-semibold">Population: </span><%= country.population %></p>
       <p><span class="font-semibold">Region: </span><%= country.region %></p>
-      <p><span class="font-semibold">Capital: </span><%= country.capital %></p>
+      <p><span class="font-semibold">Capital: </span><%= country.capital.try(:first) %></p>
     </div>
   </a>
 </div>
