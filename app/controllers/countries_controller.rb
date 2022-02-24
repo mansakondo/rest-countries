@@ -1,6 +1,6 @@
 class CountriesController < ApplicationController
   def index
-    @countries ||= fetch_countries
+    @countries = fetch_countries
   end
 
   def show
