@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" class="<%= cookies[:theme] %>">
+<html lang="en" class="<%= params[:theme] || cookies[:theme] %>">
   <head>
     <title>RestCountries</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= preload_link_tag 'https://fonts.gstatic.com' %>
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap' %>
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body class="bg-gray-veryLightGray font-body text-body1 text-blue-darkerBlue dark:bg-blue-veryDarkBlue dark:text-white">
 
     <header class="flex items-center justify-between px-6 py-8 shadow-md surface md:px-16 dark:bg-blue-dark">
-      <a href="/">
+      <%= link_to countries_path(theme: params[:theme]) do %>
         <h1 class="text-xl font-extrabold">Where in the world?</h1>
-      </a>
-      <button data-toggle="dark">
-        <span class="material-icons"><%= cookies[:theme] == "dark" ? "light_mode" : "dark_mode" %></span>
-      </button>
+      <% end %>
+
+      <%= button_to countries_path, params: { theme: params[:theme] ? (params[:theme] == "dark" ? "light" : "dark") : cookies[:theme] == "dark" ? "light" : "dark" }, data: { controller: "theme", action: "click->theme#toggle" }, method: :get do %>
+        <span class="material-icons" data-theme-target="icon"><%= params[:theme] ? (params[:theme] == "dark" ? "light_mode" : "dark_mode") : cookies[:theme] == "dark" ? "light_mode" : "dark_mode" %></span>
+      <% end %>
     </header>
 
     <div class="mx-6 my-8 md:my-16 md:mx-16">

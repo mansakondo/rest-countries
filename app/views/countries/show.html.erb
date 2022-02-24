@@ -1,7 +1,8 @@
-<a href="/">
+<%= link_to countries_path(theme: params[:theme]) do %>
   <button class="flex items-center px-8 py-2 mb-16 surface">
     <span class="mr-2 material-icons">arrow_back</span>
     <span>Back</span>
   </button>
-</a>
+<% end %>
+
 <%= render partial: 'details', object: @country, as: :country %>

@@ -34,10 +34,22 @@ ul {
 	}
 }
 
-#region-select {
-	opacity: 0;
+#toggle-regions {
+	+ div > label > span::before {
+		content: "expand_more";
+	}
 
-	&:target {
-		opacity: 1;
+	+ div + input + #region-select {
+		opacity: 0;
+	}
+
+	&:checked {
+		+ div > label > span::before {
+			content: "expand_less";
+		}
+
+		+ div + input + #region-select {
+			opacity: 1;
+		}
 	}
 }
