@@ -21,7 +21,9 @@
 }
 
 ul {
-	a {
+	input {
+		width: inherit;
+		text-align: inherit;
 		@apply block px-6 py-2 cursor-pointer;
 
 		&:last-of-type {
@@ -39,8 +41,9 @@ ul {
 		content: "expand_more";
 	}
 
-	+ div + input + #region-select {
+	+ div + #region-select {
 		opacity: 0;
+		visibility: collapse;
 	}
 
 	&:checked {
@@ -48,8 +51,9 @@ ul {
 			content: "expand_less";
 		}
 
-		+ div + input + #region-select {
+		+ div + #region-select {
 			opacity: 1;
+			visibility: visible;
 		}
 	}
 }
