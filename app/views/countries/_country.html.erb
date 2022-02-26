@@ -1,5 +1,5 @@
 <div class="mb-10 surface hover:bg-gray-veryLightGray dark:hover:bg-blue-veryDarkBlue">
-  <a href="<%= country_path(country.common_name, theme: params[:theme]) %>" data-turbo-frame="_top">
+  <a href="<%= country_path(country.common_name, **(params[:theme] ? { theme: params[:theme] } : {})) %>" data-turbo-frame="_top">
     <img src="<%= country.svg_flag %>" alt="<%= country.common_name %>"class="shadow">
     <div class="p-8">
       <h1 class="mb-3 text-xl font-extrabold"><%= country.common_name %></h1>

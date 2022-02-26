@@ -1,42 +1,44 @@
-<%= turbo_frame_tag "countries" do %>
-  <div class="md:flex">
-    <form data-turbo-frame="countries" class="flex items-center h-16 p-3 mb-10 mr-4 surface md:w-4/12">
-      <% if params[:theme] %>
-        <input type="hidden" value="<%= params[:theme] %>" name="theme" />
-      <% end %>
-      <button type="submit" class="flex">
-        <span class="ml-4 material-icons text-gray-dark dark:text-white">search</span>
-      </button>
-      <input type="search" name="name" placeholder="Search for a country" class="ml-8 bg-transparent dark:placeholder-white" aria-label="Search for a country">
-    </form>
+<div class="md:flex">
+  <form data-turbo-frame="countries" data-controller="search" class="flex items-center h-16 p-3 mb-10 mr-4 surface md:w-4/12">
+    <% unless cookies[:theme] %>
+      <input type="hidden" value="<%= params[:theme] %>" name="theme" />
+    <% end %>
 
-    <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
-      <form data-turbo-frame="countries">
-        <input type="checkbox" id="toggle-regions" class="absolute w-0 h-0 opacity-0">
+    <button type="submit" class="flex">
+      <span class="ml-4 material-icons text-gray-dark dark:text-white">search</span>
+    </button>
 
-        <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface">
-          <span><%= params[:region] && !params[:region].strip.empty? ? params[:region] : 'Filter by Region' %></span>
+    <input type="search" name="name" placeholder="Search for a country" data-action="input->search#display_results"class="ml-8 bg-transparent dark:placeholder-white" aria-label="Search for a country">
+  </form>
 
-          <label for="toggle-regions" class="flex">
-            <span class="material-icons"></span>
-          </label>
-        </div>
+  <div class="absolute z-50 mr-16 rounded md:right-0 md:w-1/5">
+    <form data-turbo-frame="_top" >
+      <input type="checkbox" id="toggle-regions" class="absolute w-0 h-0 opacity-0">
 
-        <ul id="region-select" class="w-full py-4 mt-1 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
-          <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
-            <% unless params[:region] == region %>
-              <input type="submit" name="region" value="<%= region %>" role="option">
-            <% end %>
+      <div class="flex items-center justify-between w-56 px-6 py-4 md:w-auto surface">
+        <span><%= params[:region] && !params[:region].strip.empty? ? params[:region] : 'Filter by Region' %></span>
+
+        <label for="toggle-regions" class="flex">
+          <span class="material-icons"></span>
+        </label>
+      </div>
+
+      <ul id="region-select" class="w-full py-4 mt-1 surface transition-opacity duration-300" role="listbox" aria-label="Select a region">
+        <% %w[ Africa Americas Asia Europe Oceania ].each do |region| %>
+          <% unless params[:region] == region %>
+            <input type="submit" name="region" value="<%= region %>" role="option">
           <% end %>
-        </ul>
-
-        <% if params[:theme] %>
-          <input type="hidden" name="theme" value="<%= params[:theme] %>" />
         <% end %>
-      </form>
-    </div>
-  </div>
+      </ul>
 
+      <% if params[:theme] %>
+        <input type="hidden" name="theme" value="<%= params[:theme] %>" />
+      <% end %>
+    </form>
+  </div>
+</div>
+
+<%= turbo_frame_tag "countries", "data-turbo-action": "replace" do %>
   <main class="block w-9/12 mx-auto mt-36 md:grid md:grid-cols-4 md:gap-10 md:w-auto md:mt-0">
     <%= render @countries %>
   </main>
