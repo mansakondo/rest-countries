@@ -14,13 +14,18 @@ class CountriesController < ApplicationController
   end
 
   def fetch_countries
-    name = country_params[:name]
+    name   = country_params[:name]
     region = country_params[:region]
 
     if (name && name =~ /^[a-z]+/i)
-      Country.find_by_name(name) || Country.all
+      if (region && region =~ /^[a-z]+/i)
+        countries = Country.find_by_name(name)
+        countries.select { |country| country.region =~ /#{region}/i } if countries
+      else
+        Country.find_by_name(name)
+      end
     elsif region && region =~ /^[a-z]+/i
-      Country.find_by_region(region) || Country.all
+      Country.find_by_region(region)
     else
       Country.all
     end
