@@ -29,7 +29,10 @@
             <% end %>
           <% end %>
         </ul>
-        <input type="hidden" name="theme" value="<%= params[:theme] || cookies[:theme] %>" />
+
+        <% if params[:theme] %>
+          <input type="hidden" name="theme" value="<%= params[:theme] %>" />
+        <% end %>
       </form>
     </div>
   </div>
