@@ -1,7 +1,11 @@
 <div class="md:flex">
   <form data-turbo-frame="countries" data-controller="search" class="flex items-center h-16 p-3 mb-10 mr-4 surface md:w-4/12">
     <% unless cookies[:theme] %>
-      <input type="hidden" value="<%= params[:theme] %>" name="theme" />
+      <input type="hidden" name="theme" value="<%= params[:theme] %>" />
+    <% end %>
+
+    <% if params[:region] %>
+      <input type="hidden" name="region" value="<%= params[:region] %>" />
     <% end %>
 
     <button type="submit" class="flex">
