@@ -22,7 +22,7 @@
         <h1 class="text-xl font-extrabold">Where in the world?</h1>
       <% end %>
 
-      <%= button_to nil, params: { theme: params[:theme] ? (params[:theme] == "dark" ? "light" : "dark") : cookies[:theme] == "dark" ? "light" : "dark", **(params[:region] ? { region: params[:region] } : {}) }, data: { controller: "theme", action: "click->theme#toggle" }, method: :get do %>
+      <%= button_to nil, params: { theme: params[:theme] ? (params[:theme] == "dark" ? "light" : "dark") : cookies[:theme] == "dark" ? "light" : "dark", **(params[:region] ? { region: params[:region] } : {}), **(params[:name] ? { name: params[:name] } : {}) }, data: { controller: "theme", action: "click->theme#toggle" }, method: :get do %>
         <span class="material-icons" data-theme-target="icon"><%= params[:theme] ? (params[:theme] == "dark" ? "light_mode" : "dark_mode") : cookies[:theme] == "dark" ? "light_mode" : "dark_mode" %></span>
       <% end %>
     </header>
