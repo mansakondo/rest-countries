@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	button:focus, input:focus {
+		outline: 0;
+	}
+}
+
+@layer components {
+	.btn {
+		@apply flex items-center px-8 py-2 surface
+	}
+}
+
+@layer utilities {
+	.surface {
+		@apply bg-white dark:bg-blue-dark rounded shadow
+	}
+}
+
+ul {
+	a {
+		@apply block px-6 py-2 cursor-pointer;
+
+		&:last-of-type {
+			margin-bottom: 0px;
+		}
+
+		&:hover {
+			@apply bg-gray-veryLightGray dark:bg-blue-veryDarkBlue;
+		}
+	}
+}
+
+#region-select {
+	opacity: 0;
+
+	&:target {
+		opacity: 1;
+	}
+}
