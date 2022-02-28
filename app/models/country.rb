@@ -67,7 +67,7 @@ class Country
   def processed_borders
     return [] unless borders
 
-    borders.map { |code| self.class.find_by_code(code).name["common"] }
+    borders.map { |code| self.class.find_by_code(code) }
   end
 
   def to_partial_path

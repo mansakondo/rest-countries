@@ -4,13 +4,13 @@ class CountriesController < ApplicationController
   end
 
   def show
-    @country = Country.find_by_name(country_params[:name]).first
+    @country = Country.find_by_code(country_params[:code])
   end
 
   private
 
   def country_params
-    params.permit(:name, :region, :theme)
+    params.permit(:name, :region, :code, :theme)
   end
 
   def fetch_countries

@@ -20,8 +20,8 @@
       <span class="font-semibold md:mr-4">Border Countries: </span>
       <div class="flex flex-col mt-2 gap-2 md:flex-row md:flex-wrap">
         <% country.processed_borders.each do |border| %>
-          <%= button_to country_path(border), params: ({ theme: params[:theme] } unless cookies[:theme]), method: :get, form: { data: { "turbo": false } }, class: "btn" do %>
-            <%= border %>
+          <%= button_to country_path(border.cca3), params: ({ theme: params[:theme] } unless cookies[:theme]), method: :get, form: { data: { "turbo": false } }, class: "btn" do %>
+            <%= border.common_name %>
           <% end %>
         <% end %>
       </div>
