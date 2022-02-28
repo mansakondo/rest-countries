@@ -53,7 +53,7 @@ class Country
   end
 
   def processed_top_level_domain
-    tld.first
+    tld.first if tld
   end
 
   def processed_currencies
