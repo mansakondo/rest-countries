@@ -8,9 +8,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= preload_link_tag 'https://fonts.gstatic.com' %>
-    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap' %>
+    <link href='https://fonts.gstatic.com' rel='preconnect' crossorigin>
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
