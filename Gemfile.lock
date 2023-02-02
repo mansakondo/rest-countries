@@ -88,6 +88,8 @@ GEM
     cssbundling-rails (1.1.0)
       railties (>= 6.0.0)
     digest (3.1.0)
+    dockerfile-rails (1.0.4)
+      rails
     erubi (1.10.0)
     ffi (1.15.5)
     globalid (1.0.0)
@@ -219,6 +221,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   cssbundling-rails
+  dockerfile-rails (>= 1.0.0)
   jsbundling-rails
   listen (~> 3.3)
   pg (~> 1.1)
